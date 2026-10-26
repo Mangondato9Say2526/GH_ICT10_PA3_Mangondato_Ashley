@@ -1,0 +1,154 @@
+/* Country capital search: style.css
+   Look: a pale nautical-chart page with a faint lat/long grid. */
+
+:root {
+    --paper: #e6eff2;
+    --grid: rgba(15, 46, 54, 0.07);
+    --ink: #0f2e36;
+    --ink-soft: #4a6670;
+    --surface: #ffffff;
+    --line: #9fb8c1;
+    --accent: #14577d;
+    --accent-hover: #0e4162;
+    --focus: #e0a100;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --paper: #0c1c21;
+        --grid: rgba(180, 215, 225, 0.07);
+        --ink: #e3eef1;
+        --ink-soft: #8fabb4;
+        --surface: #15303a;
+        --line: #3b5a65;
+        --accent: #5fb4e0;
+        --accent-hover: #86c7ea;
+        --focus: #f0b429;
+    }
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 12vh 1.25rem 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    color: var(--ink);
+    background-color: var(--paper);
+    background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 40px 40px;
+}
+
+/* Search bar: input and button read as one control */
+form {
+    width: 100%;
+    max-width: 34rem;
+    display: flex;
+    align-items: stretch;
+    background: var(--surface);
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    overflow: hidden;
+    box-shadow: 0 6px 0 var(--ink);
+}
+
+form br {
+    display: none;
+}
+
+form:focus-within {
+    outline: 3px solid var(--focus);
+    outline-offset: 4px;
+}
+
+input[type="text"] {
+    flex: 1;
+    min-width: 0;
+    padding: 1rem 1.5rem;
+    font: inherit;
+    font-size: 1.1rem;
+    color: var(--ink);
+    background: transparent;
+    border: 0;
+    outline: none;
+}
+
+input[type="text"]::placeholder {
+    color: var(--ink-soft);
+}
+
+input[type="button"] {
+    padding: 0 1.75rem;
+    font: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--paper);
+    background: var(--accent);
+    border: 0;
+    border-left: 2px solid var(--ink);
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+input[type="button"]:hover {
+    background: var(--accent-hover);
+}
+
+input[type="button"]:active {
+    transform: translateY(1px);
+}
+
+input[type="button"]:focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: -6px;
+}
+
+/* Result: only shown once main.py writes something into it */
+#output {
+    width: 100%;
+    max-width: 34rem;
+    padding: 1.25rem 1.5rem;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.35rem;
+    line-height: 1.5;
+    color: var(--ink);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 6px solid var(--accent);
+    border-radius: 4px;
+    overflow-wrap: anywhere;
+}
+
+#output:empty {
+    display: none;
+}
+
+@media (max-width: 30rem) {
+    body {
+        padding-top: 6vh;
+    }
+
+    input[type="text"] {
+        padding: 0.9rem 1rem;
+    }
+
+    input[type="button"] {
+        padding: 0 1.1rem;
+    }
+}
